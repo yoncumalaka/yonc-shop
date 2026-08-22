@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YONC SHOP — Rice Bowl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="#home" class="logo">YONC<span>SHOP</span></a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Menu</a>
+        <a href="#about">Tentang</a>
+    </nav>
+
+    <button class="cart-btn" onclick="toggleCart()">
+        🛒 <span id="cartCount">0</span>
+    </button>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="badge">RICE BOWL • PRE-ORDER</p>
+
+        <h1>Rice bowl<br><span>made easy.</span></h1>
+
+        <p class="hero-desc">
+            Rice bowl praktis, enak, dan cocok buat makan kapan aja.
+            Pilih menu, masukin keranjang, lalu PO langsung via WhatsApp.
+        </p>
+
+        <a href="#products" class="hero-btn">Lihat Menu →</a>
+    </div>
+
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85" alt="Rice Bowl">
+    </div>
+</section>
+
+
+<section class="products-section" id="products">
+
+    <div class="section-heading">
+        <div>
+            <p class="small-title">YONC SHOP</p>
+            <h2>Pilih Menu</h2>
+        </div>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Cari menu..."
+            onkeyup="searchProducts()"
+        >
+    </div>
+
+    <div class="category">
+        <button class="active" onclick="filterProducts('all', this)">Semua</button>
+        <button onclick="filterProducts('chicken', this)">Chicken</button>
+        <button onclick="filterProducts('beef', this)">Beef</button>
+        <button onclick="filterProducts('special', this)">Special</button>
+    </div>
+
+
+    <div class="product-grid" id="productGrid">
+
+        <article class="product-card" data-category="chicken">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
+                alt="Chicken Rice Bowl"
+            >
+
+            <div class="product-info">
+                <p class="category-name">Chicken</p>
+                <h3>Chicken Teriyaki Bowl</h3>
+                <p class="price">Rp15.000</p>
+
+                <button onclick="addToCart('Chicken Teriyaki Bowl', 15000)">
+                    + Keranjang
+                </button>
+            </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="chicken">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
+                alt="Chicken Rice Bowl"
+            >
+
+            <div class="product-info">
+                <p class="category-name">Chicken</p>
+                <h3>Chicken Sambal Bowl</h3>
+                <p class="price">Rp15.000</p>
+
+                <button onclick="addToCart('Chicken Sambal Bowl', 15000)">
+                    + Keranjang
+                </button>
+            </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="beef">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+                alt="Beef Rice Bowl"
+            >
+
+            <div class="product-info">
+                <p class="category-name">Beef</p>
+                <h3>Beef Blackpepper Bowl</h3>
+                <p class="price">Rp18.000</p>
+
+                <button onclick="addToCart('Beef Blackpepper Bowl', 18000)">
+                    + Keranjang
+                </button>
+            </div>
+
+        </article>
+
+
+        <article class="product-card" data-category="special">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85"
+                alt="Special Rice Bowl"
+            >
+
+            <div class="product-info">
+                <p class="category-name">Special</p>
+                <h3>YONC Special Bowl</h3>
+                <p class="price">Rp20.000</p>
+
+                <button onclick="addToCart('YONC Special Bowl', 20000)">
+                    + Keranjang
+                </button>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<section class="about" id="about">
+
+    <p class="small-title">ABOUT YONC SHOP</p>
+
+    <h2>Simple food, happy mood.</h2>
+
+    <p>
+        Menu rice bowl untuk kamu yang pengen makan enak tanpa ribet.
+        Semua pesanan diproses melalui WhatsApp.
+    </p>
+
+</section>
+
+</main>
+
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+
+<aside class="cart" id="cart">
+
+    <div class="cart-header">
+        <h2>Pesanan</h2>
+
+        <button onclick="toggleCart()">✕</button>
+    </div>
+
+
+    <div id="cartItems" class="cart-items">
+        <p class="empty-cart">Belum ada pesanan 🍚</p>
+    </div>
+
+
+    <div class="cart-bottom">
+
+        <div class="total">
+            <span>Total</span>
+            <strong id="cartTotal">Rp0</strong>
+        </div>
+
+        <button class="checkout" onclick="checkout()">
+            PO via WhatsApp →
+        </button>
+
+    </div>
+
+</aside>
+
+
+<footer>
+
+    <div class="logo">
+        YONC<span>SHOP</span>
+    </div>
+
+    <p>© 2026 YONC SHOP</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
