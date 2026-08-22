@@ -239,7 +239,7 @@ function checkout() {
 
 
     let message =
-        "Halo kak, saya mau PO rice bowl dong:%0A%0A";
+        "laper nih kak, saya mau PO rice bowl dong:%0A%0A";
 
 
     let total = 0;
