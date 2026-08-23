@@ -163,38 +163,28 @@ function toggleCart() {
 
 
 function filterProducts(category, button) {
-
-    document
-        .querySelectorAll(".category button")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
+    document.querySelectorAll(".category button").forEach(btn => {
+        btn.classList.remove("active");
+    });
 
     button.classList.add("active");
 
+    document.querySelectorAll(".product-card").forEach(product => {
+        const productCategory =
+            (product.dataset.category || "").trim().toLowerCase();
 
-    document
-        .querySelectorAll(".product-card")
-        .forEach(product => {
+        const selectedCategory =
+            (category || "").trim().toLowerCase();
 
-            if (
-                category === "all" ||
-                product.dataset.category === category
-            ) {
-
-                product.style.display = "";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
-
-        });
-
+        if (
+            selectedCategory === "all" ||
+            productCategory === selectedCategory
+        ) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
+        }
+    });
 }
 
 
