@@ -66,21 +66,49 @@ body {
     color: #0d63b7;
 }
 
+
+/* NAVBAR ACTIONS */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.account-btn,
+.cart-btn {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.account-btn {
+    background: #eaf4ff;
+    color: #0d63b7;
+
+    padding: 10px 14px;
+
+    border-radius: 30px;
+}
+
+.account-btn:hover {
+    background: #dceeff;
+}
+
 .cart-btn {
     background: #0d63b7;
     color: white;
-
-    border: none;
 
     padding: 10px 16px;
 
     border-radius: 30px;
 
-    cursor: pointer;
-
-    font-weight: bold;
-
     box-shadow: 0 8px 20px rgba(13,99,183,.18);
+}
+
+.cart-btn:hover {
+    background: #084d8d;
 }
 
 
@@ -552,6 +580,214 @@ body {
 }
 
 
+/* =========================
+   ACCOUNT MODAL
+========================= */
+
+.account-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(13,39,66,.45);
+
+    backdrop-filter: blur(8px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: .25s;
+
+    z-index: 200;
+}
+
+.account-modal.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+.account-box {
+    width: 100%;
+
+    max-width: 390px;
+
+    background: white;
+
+    border: 1px solid #dce9f5;
+
+    border-radius: 22px;
+
+    padding: 35px;
+
+    position: relative;
+
+    box-shadow:
+        0 30px 80px rgba(13,63,105,.25);
+
+    transform: translateY(15px) scale(.97);
+
+    transition: .25s;
+}
+
+.account-modal.show .account-box {
+    transform: translateY(0) scale(1);
+}
+
+.account-close {
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    width: 34px;
+
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eef6ff;
+
+    color: #58708d;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.account-close:hover {
+    background: #dceeff;
+
+    color: #0d63b7;
+}
+
+.account-box h2 {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.account-desc {
+    color: #7890a8;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+}
+
+.account-box input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #d5e3f0;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: #fafdff;
+
+    color: #10243e;
+}
+
+.account-box input:focus {
+    border-color: #0d63b7;
+
+    box-shadow: 0 0 0 3px rgba(13,99,183,.08);
+}
+
+.account-submit {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #0d63b7;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.account-submit:hover {
+    background: #084d8d;
+
+    transform: translateY(-1px);
+}
+
+.account-switch {
+    text-align: center;
+
+    color: #7890a8;
+
+    font-size: 13px;
+
+    margin-top: 20px;
+}
+
+.account-switch button {
+    border: none;
+
+    background: none;
+
+    color: #0d63b7;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#profileForm {
+    text-align: center;
+}
+
+#profileForm .small-title {
+    margin-top: 10px;
+}
+
+#profileForm .account-submit {
+    margin-top: 20px;
+
+    background: #d95353;
+}
+
+#profileForm .account-submit:hover {
+    background: #bd4141;
+}
+
+
 /* FOOTER */
 
 footer {
@@ -593,6 +829,16 @@ footer p {
         display: none;
     }
 
+    .account-btn {
+        padding: 9px 11px;
+
+        font-size: 13px;
+    }
+
+    .cart-btn {
+        padding: 9px 12px;
+    }
+
     .hero {
         grid-template-columns: 1fr;
 
@@ -625,6 +871,52 @@ footer p {
 
 @media (max-width: 480px) {
 
+    .navbar {
+        height: 68px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .navbar-actions {
+        gap: 5px;
+    }
+
+    .account-btn {
+        font-size: 0;
+
+        width: 40px;
+
+        height: 40px;
+
+        padding: 0;
+
+        border-radius: 50%;
+    }
+
+    .account-btn::before {
+        content: "👤";
+
+        font-size: 17px;
+    }
+
+    .cart-btn {
+        width: 40px;
+
+        height: 40px;
+
+        padding: 0;
+
+        border-radius: 50%;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+
+        letter-spacing: -3px;
+    }
+
     .product-grid {
         grid-template-columns: 1fr 1fr;
 
@@ -647,10 +939,20 @@ footer p {
         white-space: nowrap;
     }
 
+    .account-box {
+        padding: 30px 22px;
+
+        border-radius: 18px;
+    }
+
+    .account-box h2 {
+        font-size: 24px;
+    }
+
     footer {
         flex-direction: column;
 
         gap: 15px;
     }
 
-}
+    }
