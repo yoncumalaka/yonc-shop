@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>YONC SHOP — Rice Bowl</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
 
-    <a href="#home" class="logo">
+    <a
+        href="#home"
+        class="logo"
+    >
         YONC<span>SHOP</span>
     </a>
 
+
     <nav>
-        <a href="#home">Home</a>
-        <a href="#products">Menu</a>
-        <a href="#about">Tentang</a>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#products">
+            Menu
+        </a>
+
+        <a href="#about">
+            Tentang
+        </a>
+
     </nav>
 
-    <button class="cart-btn" onclick="toggleCart()">
+
+    <button
+        class="cart-btn"
+        onclick="toggleCart()"
+    >
         🛒 <span id="cartCount">0</span>
     </button>
 
 </header>
 
 
+
 <main>
 
-<!-- HERO -->
 
-<section class="hero" id="home">
+<!-- ================= HERO ================= -->
+
+<section
+    class="hero"
+    id="home"
+>
 
     <div class="hero-content">
 
@@ -40,21 +79,32 @@
             RICE BOWL • PRE-ORDER
         </p>
 
+
         <h1>
             Rice bowl<br>
             <span>made easy.</span>
         </h1>
 
+
         <p class="hero-desc">
-            Rice bowl praktis, enak, dan cocok buat makan kapan aja.
-            Pilih menu, masukin keranjang, lalu PO langsung via WhatsApp.
+
+            Rice bowl praktis, enak, dan cocok buat
+            makan kapan aja.
+            Pilih menu, masukin keranjang,
+            lalu PO langsung via WhatsApp.
+
         </p>
 
-        <a href="#products" class="hero-btn">
+
+        <a
+            href="#products"
+            class="hero-btn"
+        >
             Lihat Menu →
         </a>
 
     </div>
+
 
 
     <div class="hero-image">
@@ -69,9 +119,16 @@
 </section>
 
 
-<!-- PRODUCTS -->
 
-<section class="products-section" id="products">
+<!-- ================= PRODUCTS ================= -->
+
+<section
+    class="products-section"
+    id="products"
+>
+
+
+    <!-- JUDUL + SEARCH -->
 
     <div class="section-heading">
 
@@ -98,33 +155,51 @@
     </div>
 
 
-    <!-- CATEGORY -->
 
-<div class="category">
+    <!-- ================= KATEGORI ================= -->
 
-    <button class="active" onclick="filterProducts('all', this)">
-        Semua
-    </button>
+    <div class="category">
 
-    <button onclick="filterProducts('chicken', this)">
-        Ayam Chicken😹
-    </button>
+        <button
+            class="active"
+            onclick="filterProducts('all', this)"
+        >
+            Semua
+        </button>
 
-    <button onclick="filterProducts('beef', this)">
-        Iwak
-    </button>
 
-    <button onclick="filterProducts('special', this)">
-        Special
-    </button>
+        <button
+            onclick="filterProducts('chicken', this)"
+        >
+            Ayam Chicken😹
+        </button>
 
-    <button onclick="filterProducts('drink', this)">
-        Minuman 🥤
-    </button>
 
-</div>
-    
-    <!-- PRODUCT GRID -->
+        <button
+            onclick="filterProducts('beef', this)"
+        >
+            Iwak
+        </button>
+
+
+        <button
+            onclick="filterProducts('special', this)"
+        >
+            Special
+        </button>
+
+
+        <button
+            onclick="filterProducts('drink', this)"
+        >
+            Minuman 🥤
+        </button>
+
+    </div>
+
+
+
+    <!-- ================= PRODUCT GRID ================= -->
 
     <div
         class="product-grid"
@@ -132,7 +207,7 @@
     >
 
 
-        <!-- CHICKEN 1 -->
+        <!-- ========== 1 CHICKEN ========== -->
 
         <article
             class="product-card"
@@ -142,8 +217,9 @@
             <img
                 class="product-image"
                 src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
-                alt="Chicken Rice Bowl"
+                alt="Chicken Teriyaki Bowl"
             >
+
 
             <div class="product-info">
 
@@ -151,13 +227,16 @@
                     Chicken
                 </p>
 
+
                 <h3>
                     Chicken Teriyaki Bowl
                 </h3>
 
+
                 <p class="price">
                     Rp15.000
                 </p>
+
 
                 <button
                     onclick="addToCart('Chicken Teriyaki Bowl', 15000)"
@@ -170,7 +249,8 @@
         </article>
 
 
-        <!-- CHICKEN 2 -->
+
+        <!-- ========== 2 CHICKEN ========== -->
 
         <article
             class="product-card"
@@ -180,8 +260,9 @@
             <img
                 class="product-image"
                 src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
-                alt="Chicken Rice Bowl"
+                alt="Chicken Sambal Bowl"
             >
+
 
             <div class="product-info">
 
@@ -189,13 +270,16 @@
                     Chicken
                 </p>
 
+
                 <h3>
                     Chicken Sambal Bowl
                 </h3>
 
+
                 <p class="price">
                     Rp15.000
                 </p>
+
 
                 <button
                     onclick="addToCart('Chicken Sambal Bowl', 15000)"
@@ -208,7 +292,94 @@
         </article>
 
 
-        <!-- IWAK -->
+
+        <!-- ========== 3 CHICKEN ========== -->
+
+        <article
+            class="product-card"
+            data-category="chicken"
+        >
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
+                alt="Chicken Black Pepper"
+            >
+
+
+            <div class="product-info">
+
+                <p class="category-name">
+                    Chicken
+                </p>
+
+
+                <h3>
+                    Chicken Black Pepper
+                </h3>
+
+
+                <p class="price">
+                    Rp17.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Chicken Black Pepper', 17000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 4 CHICKEN ========== -->
+
+        <article
+            class="product-card"
+            data-category="chicken"
+        >
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85"
+                alt="Chicken Crispy Bowl"
+            >
+
+
+            <div class="product-info">
+
+                <p class="category-name">
+                    Chicken
+                </p>
+
+
+                <h3>
+                    Chicken Crispy Bowl
+                </h3>
+
+
+                <p class="price">
+                    Rp16.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Chicken Crispy Bowl', 16000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 5 IWAK ========== -->
 
         <article
             class="product-card"
@@ -221,397 +392,461 @@
                 alt="Orang Sigma"
             >
 
+
             <div class="product-info">
 
                 <p class="category-name">
                     Iwak
-<div class="product-grid" id="productGrid">
+                </p>
 
 
-    <!-- ================= CHICKEN ================= -->
+                <h3>
+                    Orang Sigma
+                </h3>
 
-    <article class="product-card" data-category="chicken">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
-            alt="Chicken Teriyaki Bowl"
+                <p class="price">
+                    Rp999.999.999
+                </p>
+
+
+                <button
+                    onclick="addToCart('Orang Sigma', 999999999)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 6 IWAK ========== -->
+
+        <article
+            class="product-card"
+            data-category="beef"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Chicken</p>
-
-            <h3>Chicken Teriyaki Bowl</h3>
-
-            <p class="price">Rp15.000</p>
-
-            <button onclick="addToCart('Chicken Teriyaki Bowl', 15000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85"
+                alt="Beef Teriyaki Bowl"
+            >
 
 
-    <article class="product-card" data-category="chicken">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
-            alt="Chicken Sambal Bowl"
+                <p class="category-name">
+                    Iwak
+                </p>
+
+
+                <h3>
+                    Beef Teriyaki Bowl
+                </h3>
+
+
+                <p class="price">
+                    Rp18.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Beef Teriyaki Bowl', 18000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 7 IWAK ========== -->
+
+        <article
+            class="product-card"
+            data-category="beef"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Chicken</p>
-
-            <h3>Chicken Sambal Bowl</h3>
-
-            <p class="price">Rp15.000</p>
-
-            <button onclick="addToCart('Chicken Sambal Bowl', 15000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+                alt="Beef Black Pepper Bowl"
+            >
 
 
-    <article class="product-card" data-category="chicken">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
-            alt="Chicken Black Pepper"
+                <p class="category-name">
+                    Iwak
+                </p>
+
+
+                <h3>
+                    Beef Black Pepper Bowl
+                </h3>
+
+
+                <p class="price">
+                    Rp19.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Beef Black Pepper Bowl', 19000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 8 SPECIAL ========== -->
+
+        <article
+            class="product-card"
+            data-category="special"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Chicken</p>
-
-            <h3>Chicken Black Pepper</h3>
-
-            <p class="price">Rp17.000</p>
-
-            <button onclick="addToCart('Chicken Black Pepper', 17000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85"
+                alt="YONC Special Bowl"
+            >
 
 
-    <article class="product-card" data-category="chicken">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85"
-            alt="Chicken Crispy Bowl"
+                <p class="category-name">
+                    Special
+                </p>
+
+
+                <h3>
+                    YONC Special Bowl
+                </h3>
+
+
+                <p class="price">
+                    Rp20.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('YONC Special Bowl', 20000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 9 SPECIAL ========== -->
+
+        <article
+            class="product-card"
+            data-category="special"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Chicken</p>
-
-            <h3>Chicken Crispy Bowl</h3>
-
-            <p class="price">Rp16.000</p>
-
-            <button onclick="addToCart('Chicken Crispy Bowl', 16000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+                alt="Spicy Special Bowl"
+            >
 
 
-    <!-- ================= IWAK ================= -->
+            <div class="product-info">
 
-    <article class="product-card" data-category="beef">
+                <p class="category-name">
+                    Special
+                </p>
 
-        <img
-            class="product-image"
-            src="a66cf61162b23cd7a90c063046f95555.jpg"
-            alt="Orang Sigma"
+
+                <h3>
+                    Spicy Special Bowl 🌶️
+                </h3>
+
+
+                <p class="price">
+                    Rp21.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Spicy Special Bowl', 21000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 10 SPECIAL ========== -->
+
+        <article
+            class="product-card"
+            data-category="special"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Iwak</p>
-
-            <h3>Orang Sigma</h3>
-
-            <p class="price">Rp999.999.999</p>
-
-            <button onclick="addToCart('Orang Sigma', 999999999)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
+                alt="YONC Jumbo Bowl"
+            >
 
 
-    <article class="product-card" data-category="beef">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85"
-            alt="Beef Teriyaki Bowl"
+                <p class="category-name">
+                    Special
+                </p>
+
+
+                <h3>
+                    YONC Jumbo Bowl
+                </h3>
+
+
+                <p class="price">
+                    Rp25.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('YONC Jumbo Bowl', 25000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 11 MINUMAN ========== -->
+
+        <article
+            class="product-card"
+            data-category="drink"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Iwak</p>
-
-            <h3>Beef Teriyaki Bowl</h3>
-
-            <p class="price">Rp18.000</p>
-
-            <button onclick="addToCart('Beef Teriyaki Bowl', 18000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85"
+                alt="Es Teh Manis"
+            >
 
 
-    <article class="product-card" data-category="beef">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
-            alt="Beef Black Pepper"
+                <p class="category-name">
+                    Minuman
+                </p>
+
+
+                <h3>
+                    Es Teh Manis 🧊
+                </h3>
+
+
+                <p class="price">
+                    Rp5.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Es Teh Manis', 5000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 12 MINUMAN ========== -->
+
+        <article
+            class="product-card"
+            data-category="drink"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Iwak</p>
-
-            <h3>Beef Black Pepper Bowl</h3>
-
-            <p class="price">Rp19.000</p>
-
-            <button onclick="addToCart('Beef Black Pepper Bowl', 19000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85"
+                alt="Kopi Susu"
+            >
 
 
-    <!-- ================= SPECIAL ================= -->
+            <div class="product-info">
 
-    <article class="product-card" data-category="special">
+                <p class="category-name">
+                    Minuman
+                </p>
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85"
-            alt="YONC Special Bowl"
+
+                <h3>
+                    Kopi Susu ☕
+                </h3>
+
+
+                <p class="price">
+                    Rp8.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Kopi Susu', 8000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 13 MINUMAN ========== -->
+
+        <article
+            class="product-card"
+            data-category="drink"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Special</p>
-
-            <h3>YONC Special Bowl</h3>
-
-            <p class="price">Rp20.000</p>
-
-            <button onclick="addToCart('YONC Special Bowl', 20000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85"
+                alt="Lemon Tea"
+            >
 
 
-    <article class="product-card" data-category="special">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
-            alt="Spicy Special Bowl"
+                <p class="category-name">
+                    Minuman
+                </p>
+
+
+                <h3>
+                    Lemon Tea 🍋
+                </h3>
+
+
+                <p class="price">
+                    Rp7.000
+                </p>
+
+
+                <button
+                    onclick="addToCart('Lemon Tea', 7000)"
+                >
+                    + Keranjang
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========== 14 MINUMAN ========== -->
+
+        <article
+            class="product-card"
+            data-category="drink"
         >
 
-        <div class="product-info">
-
-            <p class="category-name">Special</p>
-
-            <h3>Spicy Special Bowl 🌶️</h3>
-
-            <p class="price">Rp21.000</p>
-
-            <button onclick="addToCart('Spicy Special Bowl', 21000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85"
+                alt="Air Mineral"
+            >
 
 
-    <article class="product-card" data-category="special">
+            <div class="product-info">
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
-            alt="YONC Jumbo Bowl"
-        >
-
-        <div class="product-info">
-
-            <p class="category-name">Special</p>
-
-            <h3>YONC Jumbo Bowl</h3>
-
-            <p class="price">Rp25.000</p>
-
-            <button onclick="addToCart('YONC Jumbo Bowl', 25000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+                <p class="category-name">
+                    Minuman
+                </p>
 
 
-    <!-- ================= MINUMAN ================= -->
-
-    <article class="product-card" data-category="drink">
-
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85"
-            alt="Es Teh Manis"
-        >
-
-        <div class="product-info">
-
-            <p class="category-name">Minuman</p>
-
-            <h3>Es Teh Manis 🧊</h3>
-
-            <p class="price">Rp5.000</p>
-
-            <button onclick="addToCart('Es Teh Manis', 5000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+                <h3>
+                    Air Mineral 💧
+                </h3>
 
 
-    <article class="product-card" data-category="drink">
-
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85"
-            alt="Kopi"
-        >
-
-        <div class="product-info">
-
-            <p class="category-name">Minuman</p>
-
-            <h3>Kopi Susu ☕</h3>
-
-            <p class="price">Rp8.000</p>
-
-            <button onclick="addToCart('Kopi Susu', 8000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+                <p class="price">
+                    Rp4.000
+                </p>
 
 
-    <article class="product-card" data-category="drink">
+                <button
+                    onclick="addToCart('Air Mineral', 4000)"
+                >
+                    + Keranjang
+                </button>
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85"
-            alt="Lemon Tea"
-        >
+            </div>
 
-        <div class="product-info">
-
-            <p class="category-name">Minuman</p>
-
-            <h3>Lemon Tea 🍋</h3>
-
-            <p class="price">Rp7.000</p>
-
-            <button onclick="addToCart('Lemon Tea', 7000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+        </article>
 
 
-    <article class="product-card" data-category="drink">
+    </div>
 
-        <img
-            class="product-image"
-            src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85"
-            alt="Air Mineral"
-        >
-
-        <div class="product-info">
-
-            <p class="category-name">Minuman</p>
-
-            <h3>Air Mineral 💧</h3>
-
-            <p class="price">Rp4.000</p>
-
-            <button onclick="addToCart('Air Mineral', 4000)">
-                + Keranjang
-            </button>
-
-        </div>
-
-    </article>
+</section>
 
 
-</div>
 
+<!-- ================= ABOUT ================= -->
 
-<!-- ABOUT -->
-
-<section class="about" id="about">
+<section
+    class="about"
+    id="about"
+>
 
     <p class="small-title">
         ABOUT YONC SHOP
     </p>
 
+
     <h2>
         Simple food, happy mood.
     </h2>
 
+
     <p>
-        Menu rice bowl untuk kamu yang pengen makan enak tanpa ribet.
+
+        Menu rice bowl untuk kamu yang pengen
+        makan enak tanpa ribet.
         Semua pesanan diproses melalui WhatsApp.
+
     </p>
 
 </section>
 
+
 </main>
 
 
-<!-- OVERLAY CART -->
+
+<!-- ================= OVERLAY ================= -->
 
 <div
     class="overlay"
@@ -620,12 +855,14 @@
 ></div>
 
 
-<!-- CART -->
+
+<!-- ================= CART ================= -->
 
 <aside
     class="cart"
     id="cart"
 >
+
 
     <div class="cart-header">
 
@@ -633,11 +870,15 @@
             Pesanan
         </h2>
 
-        <button onclick="toggleCart()">
+
+        <button
+            onclick="toggleCart()"
+        >
             ✕
         </button>
 
     </div>
+
 
 
     <div
@@ -652,7 +893,9 @@
     </div>
 
 
+
     <div class="cart-bottom">
+
 
         <div class="total">
 
@@ -660,11 +903,13 @@
                 Total
             </span>
 
+
             <strong id="cartTotal">
                 Rp0
             </strong>
 
         </div>
+
 
 
         <button
@@ -674,27 +919,39 @@
             PO via WhatsApp →
         </button>
 
+
     </div>
 
 </aside>
 
 
-<!-- FOOTER -->
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
+
     <div class="logo">
+
         YONC<span>SHOP</span>
+
     </div>
+
 
     <p>
         © 2026 yoncumalaka
     </p>
 
+
 </footer>
 
 
+
+<!-- ================= JAVASCRIPT ================= -->
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
