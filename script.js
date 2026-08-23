@@ -342,3 +342,18 @@ function checkout() {
 ========================= */
 
 updateCart();
+
+function closeWelcome() {
+
+    const welcome =
+        document.getElementById("welcomeScreen");
+
+    welcome.classList.add("hide");
+
+    setTimeout(() => {
+
+        welcome.style.display = "none";
+
+    }, 450);
+
+}
