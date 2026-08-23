@@ -19,7 +19,7 @@ function formatRupiah(number) {
 
 
 /* =========================
-   KERANJANG
+   ADD TO CART
 ========================= */
 
 function addToCart(name, price) {
@@ -27,6 +27,7 @@ function addToCart(name, price) {
     const existing = cart.find(
         item => item.name === name
     );
+
 
     if (existing) {
 
@@ -42,11 +43,14 @@ function addToCart(name, price) {
 
     }
 
+
     updateCart();
+
 
     document
         .getElementById("cart")
         .classList.add("show");
+
 
     document
         .getElementById("overlay")
@@ -54,6 +58,10 @@ function addToCart(name, price) {
 
 }
 
+
+/* =========================
+   UPDATE CART
+========================= */
 
 function updateCart() {
 
@@ -85,7 +93,9 @@ function updateCart() {
 
                     <div>
 
-                        <h4>${item.name}</h4>
+                        <h4>
+                            ${item.name}
+                        </h4>
 
                         <p>
                             ${formatRupiah(item.price)}
@@ -96,10 +106,9 @@ function updateCart() {
 
                     <button
                         class="remove"
-                        onclick="removeItem(${index})">
-
+                        onclick="removeItem(${index})"
+                    >
                         Hapus
-
                     </button>
 
                 </div>
@@ -112,7 +121,8 @@ function updateCart() {
 
 
     const totalQuantity = cart.reduce(
-        (sum, item) => sum + item.quantity,
+        (sum, item) =>
+            sum + item.quantity,
         0
     );
 
@@ -127,11 +137,16 @@ function updateCart() {
     cartCount.textContent =
         totalQuantity;
 
+
     cartTotal.textContent =
         formatRupiah(totalPrice);
 
 }
 
+
+/* =========================
+   REMOVE ITEM
+========================= */
 
 function removeItem(index) {
 
@@ -142,11 +157,16 @@ function removeItem(index) {
 }
 
 
+/* =========================
+   TOGGLE CART
+========================= */
+
 function toggleCart() {
 
     document
         .getElementById("cart")
         .classList.toggle("show");
+
 
     document
         .getElementById("overlay")
@@ -156,10 +176,16 @@ function toggleCart() {
 
 
 /* =========================
-   FILTER MENU
+   FILTER PRODUCTS
 ========================= */
 
 function filterProducts(category, button) {
+
+    const selectedCategory =
+        String(category)
+            .trim()
+            .toLowerCase();
+
 
     document
         .querySelectorAll(".category button")
@@ -173,16 +199,14 @@ function filterProducts(category, button) {
     button.classList.add("active");
 
 
-    const selectedCategory =
-        category.trim().toLowerCase();
-
-
     document
         .querySelectorAll(".product-card")
         .forEach(product => {
 
             const productCategory =
-                (product.dataset.category || "")
+                String(
+                    product.dataset.category || ""
+                )
                 .trim()
                 .toLowerCase();
 
@@ -202,11 +226,24 @@ function filterProducts(category, button) {
 
         });
 
+
+    /*
+        Bersihkan pencarian ketika
+        pindah kategori.
+    */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    if (searchInput) {
+        searchInput.value = "";
+    }
+
 }
 
 
 /* =========================
-   SEARCH
+   SEARCH PRODUCTS
 ========================= */
 
 function searchProducts() {
@@ -215,6 +252,7 @@ function searchProducts() {
         document
             .getElementById("searchInput")
             .value
+            .trim()
             .toLowerCase();
 
 
@@ -229,10 +267,15 @@ function searchProducts() {
                     .toLowerCase();
 
 
-            product.style.display =
-                name.includes(keyword)
-                    ? ""
-                    : "none";
+            if (name.includes(keyword)) {
+
+                product.style.display = "";
+
+            } else {
+
+                product.style.display = "none";
+
+            }
 
         });
 
@@ -240,14 +283,16 @@ function searchProducts() {
 
 
 /* =========================
-   CHECKOUT WHATSAPP
+   CHECKOUT
 ========================= */
 
 function checkout() {
 
     if (cart.length === 0) {
 
-        alert("Keranjang masih kosong 😭");
+        alert(
+            "Keranjang masih kosong 😭"
+        );
 
         return;
 
@@ -293,291 +338,7 @@ function checkout() {
 
 
 /* =========================
-   AKUN / LOGIN
-========================= */
-
-function openAccount() {
-
-    const modal =
-        document.getElementById("accountModal");
-
-    modal.classList.add("show");
-
-    checkLogin();
-
-}
-
-
-function closeAccount() {
-
-    document
-        .getElementById("accountModal")
-        .classList.remove("show");
-
-}
-
-
-/* =========================
-   TAMPILAN LOGIN
-========================= */
-
-function showLogin() {
-
-    document.getElementById("loginForm")
-        .style.display = "block";
-
-    document.getElementById("registerForm")
-        .style.display = "none";
-
-    document.getElementById("profileForm")
-        .style.display = "none";
-
-}
-
-
-function showRegister() {
-
-    document.getElementById("loginForm")
-        .style.display = "none";
-
-    document.getElementById("registerForm")
-        .style.display = "block";
-
-    document.getElementById("profileForm")
-        .style.display = "none";
-
-}
-
-
-/* =========================
-   DAFTAR AKUN
-========================= */
-
-function register() {
-
-    const name =
-        document
-            .getElementById("registerName")
-            .value
-            .trim();
-
-
-    const email =
-        document
-            .getElementById("registerEmail")
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById("registerPassword")
-            .value;
-
-
-    if (!name || !email || !password) {
-
-        alert("Lengkapi semua data dulu ya 😭");
-
-        return;
-
-    }
-
-
-    if (password.length < 6) {
-
-        alert("Password minimal 6 karakter ya 🔐");
-
-        return;
-
-    }
-
-
-    const user = {
-
-        name: name,
-
-        email: email,
-
-        password: password
-
-    };
-
-
-    localStorage.setItem(
-        "yoncUser",
-        JSON.stringify(user)
-    );
-
-
-    localStorage.setItem(
-        "yoncLoggedIn",
-        "true"
-    );
-
-
-    alert(
-        "Akun berhasil dibuat! 🎉"
-    );
-
-
-    checkLogin();
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function login() {
-
-    const email =
-        document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById("loginPassword")
-            .value;
-
-
-    const savedUser =
-        JSON.parse(
-            localStorage.getItem("yoncUser")
-        );
-
-
-    if (!savedUser) {
-
-        alert(
-            "Akun belum terdaftar 😭 Silakan daftar dulu."
-        );
-
-        return;
-
-    }
-
-
-    if (
-        email === savedUser.email &&
-        password === savedUser.password
-    ) {
-
-        localStorage.setItem(
-            "yoncLoggedIn",
-            "true"
-        );
-
-
-        alert(
-            "Login berhasil! 🥳"
-        );
-
-
-        checkLogin();
-
-    } else {
-
-        alert(
-            "Email atau password salah 😭"
-        );
-
-    }
-
-}
-
-
-/* =========================
-   CEK STATUS LOGIN
-========================= */
-
-function checkLogin() {
-
-    const savedUser =
-        JSON.parse(
-            localStorage.getItem("yoncUser")
-        );
-
-
-    const loggedIn =
-        localStorage.getItem("yoncLoggedIn")
-        === "true";
-
-
-    const accountText =
-        document.getElementById("accountText");
-
-
-    if (
-        savedUser &&
-        loggedIn
-    ) {
-
-        document.getElementById("loginForm")
-            .style.display = "none";
-
-        document.getElementById("registerForm")
-            .style.display = "none";
-
-        document.getElementById("profileForm")
-            .style.display = "block";
-
-
-        document.getElementById("profileName")
-            .textContent =
-            "Halo, " + savedUser.name + " 👋";
-
-
-        document.getElementById("profileEmail")
-            .textContent =
-            savedUser.email;
-
-
-        accountText.textContent =
-            savedUser.name;
-
-    } else {
-
-        showLogin();
-
-        accountText.textContent =
-            "Akun";
-
-    }
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logout() {
-
-    localStorage.setItem(
-        "yoncLoggedIn",
-        "false"
-    );
-
-
-    alert(
-        "Kamu berhasil logout 👋"
-    );
-
-
-    checkLogin();
-
-}
-
-
-/* =========================
    START
 ========================= */
 
 updateCart();
-
-checkLogin();
