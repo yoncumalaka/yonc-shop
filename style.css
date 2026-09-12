@@ -810,3 +810,12 @@ footer p {
 
     }
 
+kode sementara doang buat ngatur file video jadi 16:9
+
+.hero-image video {
+    width: 320px !important;
+    height: 180px !important;
+    object-fit: fill !important;
+    border-radius: 20px;
+    transform: none;
+}
