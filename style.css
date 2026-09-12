@@ -810,12 +810,41 @@ footer p {
 
     }
 
-kode sementara doang buat ngatur file video jadi 16:9
+/* animasi buat file videonya */
 
 .hero-image video {
-    width: 320px !important;
-    height: 180px !important;
-    object-fit: fill !important;
+    width: 320px;
+    height: 180px;
+    object-fit: cover;
     border-radius: 20px;
-    transform: none;
+    box-shadow: 0 30px 70px rgba(20, 72, 116, .22);
+
+    animation: floating 5s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes floating {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(2deg);
+    }
+
+    20% {
+        transform: translate3d(2px, -7px, 0) rotate(1.5deg);
+    }
+
+    40% {
+        transform: translate3d(-2px, -15px, 0) rotate(0deg);
+    }
+
+    60% {
+        transform: translate3d(1px, -10px, 0) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate3d(-1px, -4px, 0) rotate(1deg);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0) rotate(2deg);
+    }
 }
