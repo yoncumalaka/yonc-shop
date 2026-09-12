@@ -195,9 +195,9 @@ body {
 }
 
 .hero-image video {
-    width: 180px;
+    width: 320px;
 
-    height: 220px;
+    height: 320px;
 
     object-fit: cover;
 
@@ -696,9 +696,9 @@ footer p {
     }
 
     .hero-image video {
-        height: 220px;
+        height: 320px;
 
-        width: 180px;
+        width: 320px;
 
         transform: none;
     }
