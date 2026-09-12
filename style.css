@@ -197,7 +197,7 @@ body {
 .hero-image video {
     width: 320px;
 
-    height: 320px;
+    height: 180px;
 
     object-fit: cover;
 
@@ -696,7 +696,7 @@ footer p {
     }
 
     .hero-image video {
-        height: 320px;
+        height: 180px;
 
         width: 320px;
 
