@@ -818,33 +818,33 @@ footer p {
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 30px 70px rgba(20, 72, 116, .22);
-
-    animation: floating 5s ease-in-out infinite;
+    animation: floating 4.5s cubic-bezier(.37, 0, .63, 1) infinite;
     will-change: transform;
 }
 
 @keyframes floating {
-    0% {
-        transform: translate3d(0, 0, 0) rotate(2deg);
+    0%, 100% {
+        transform: translateY(25px) rotate(1deg);
     }
 
     20% {
-        transform: translate3d(2px, -7px, 0) rotate(1.5deg);
+        transform: translateY(5px) rotate(-0.5deg);
     }
 
-    40% {
-        transform: translate3d(-2px, -15px, 0) rotate(0deg);
+    35% {
+        transform: translateY(0px) rotate(-1deg);
     }
 
-    60% {
-        transform: translate3d(1px, -10px, 0) rotate(-1deg);
+    50% {
+        transform: translateY(7px) rotate(0.5deg);
+    }
+
+    65% {
+        transform: translateY(2px) rotate(-0.3deg);
     }
 
     80% {
-        transform: translate3d(-1px, -4px, 0) rotate(1deg);
-    }
-
-    100% {
-        transform: translate3d(0, 0, 0) rotate(2deg);
+        transform: translateY(12px) rotate(0.5deg);
     }
 }
+
