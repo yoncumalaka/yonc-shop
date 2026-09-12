@@ -195,13 +195,13 @@ body {
 }
 
 .hero-image video {
-    width: min(250px, 100%);
+    width: 180px;
 
-    height: 200px;
+    height: 220px;
 
     object-fit: cover;
 
-    border-radius: 28px;
+    border-radius: 20px;
 
     box-shadow: 0 30px 70px rgba(20, 72, 116, .22);
 
@@ -696,9 +696,9 @@ footer p {
     }
 
     .hero-image video {
-        height: 200px;
+        height: 220px;
 
-        width: 100%;
+        width: 180px;
 
         transform: none;
     }
