@@ -1,10 +1,26 @@
+// ============================
+// KONFIGURASI
+// ============================
+
+// Ganti dengan nomor WhatsApp toko kamu.
+// Format: 62xxxxxxxxxx
+const WHATSAPP_NUMBER = "6282178601945";
+
+
+// ============================
+// DATA KERANJANG
+// ============================
+
 let cart = [];
 
-const WA_NUMBER = "6282178601945";
 let activeCategory = "all";
 
-/* FORMAT RUPIAH */
-function formatRupiah(number) {
+
+// ============================
+// FORMAT RUPIAH
+// ============================
+
+function rupiah(number) {
     return new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
@@ -12,214 +28,358 @@ function formatRupiah(number) {
     }).format(number);
 }
 
-/* ADD TO CART */
-function addToCart(name, price) {
-    const existing = cart.find(
-        item => item.name === name
-    );
 
-    if (existing) {
-        existing.quantity++;
-    } else {
-        cart.push({
-            name,
-            price,
-            quantity: 1
-        });
-    }
+// ============================
+// ELEMENT HTML
+// ============================
 
-    updateCart();
-    setCart(true);
-}
+const cartElement = document.getElementById("cart");
+const overlayElement = document.getElementById("overlay");
 
-/* UPDATE CART */
-function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    const cartCount = document.getElementById("cartCount");
-    const cartTotal = document.getElementById("cartTotal");
+const cartItemsElement = document.getElementById("cartItems");
+const cartCountElement = document.getElementById("cartCount");
+const cartTotalElement = document.getElementById("cartTotal");
 
-    if (!cartItems || !cartCount || !cartTotal) return;
+const searchInput = document.getElementById("searchInput");
 
-    cartItems.innerHTML = "";
+const productCards = document.querySelectorAll(".product-card");
 
-    if (cart.length === 0) {
-        cartItems.innerHTML =
-            '<p class="empty-cart">Keranjang masih kosong.</p>';
-    }
+const categoryButtons = document.querySelectorAll(".category button");
 
-    cart.forEach((item, index) => {
-        const row = document.createElement("div");
-        row.className = "cart-item";
 
-        const details = document.createElement("div");
-
-        const title = document.createElement("h4");
-        title.textContent = item.name;
-
-        const price = document.createElement("p");
-        price.textContent =
-            `${formatRupiah(item.price)} × ${item.quantity}`;
-
-        details.append(title, price);
-
-        const remove = document.createElement("button");
-        remove.className = "remove";
-        remove.textContent = "Hapus";
-
-        remove.onclick = () => removeItem(index);
-
-        row.append(details, remove);
-        cartItems.appendChild(row);
-    });
-
-    const quantity = cart.reduce(
-        (sum, item) => sum + item.quantity, 0
-    );
-
-    const total = cart.reduce(
-        (sum, item) => sum + item.price * item.quantity, 0
-    );
-
-    cartCount.textContent = quantity;
-    cartTotal.textContent = formatRupiah(total);
-}
-
-/* REMOVE ITEM */
-function removeItem(index) {
-    cart.splice(index, 1);
-    updateCart();
-}
-
-/* TOGGLE CART */
-function setCart(open) {
-    document.getElementById("cart").classList.toggle("show", open);
-    document.getElementById("overlay").classList.toggle("show", open);
-    document.body.classList.toggle("cart-open", open);
-}
+// ============================
+// BUKA / TUTUP KERANJANG
+// ============================
 
 function toggleCart() {
-    const cart = document.getElementById("cart");
 
-    setCart(!cart.classList.contains("show"));
+    cartElement.classList.toggle("show");
+
+    overlayElement.classList.toggle("show");
+
 }
 
-/* FILTER + SEARCH */
-function applyFilters() {
-    const keyword = document
-        .getElementById("searchInput")
-        .value.trim().toLowerCase();
 
-    let visible = 0;
+// ============================
+// TAMBAH KE KERANJANG
+// ============================
 
-    document.querySelectorAll(".product-card").forEach(product => {
-        const category = (
-            product.dataset.category || ""
-        ).toLowerCase();
+function addToCart(name, price) {
 
-        const name = product.querySelector("h3")
-            .textContent.toLowerCase();
+    const existingItem = cart.find(item => item.name === name);
 
-        const categoryMatch =
-            activeCategory === "all" ||
-            category === activeCategory.toLowerCase();
+    if (existingItem) {
 
-        const searchMatch = name.includes(keyword);
+        existingItem.quantity++;
 
-        const show = categoryMatch && searchMatch;
+    } else {
 
-        product.hidden = !show;
-
-        if (show) visible++;
-    });
-
-    const empty = document.getElementById("noProducts");
-
-    if (empty) {
-        empty.hidden = visible !== 0;
-    }
-}
-
-/* FILTER CATEGORY */
-function filterProducts(category, button) {
-    activeCategory = category;
-
-    document.querySelectorAll(".category button")
-        .forEach(btn => {
-            btn.classList.remove("active");
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
         });
 
-    button.classList.add("active");
-
-    applyFilters();
-}
-
-/* SEARCH */
-function searchProducts() {
-    applyFilters();
-}
-
-/* CHECKOUT WHATSAPP */
-function checkout() {
-    if (cart.length === 0) {
-        alert("Keranjang masih kosong!");
-        return;
     }
 
+    renderCart();
+
+}
+
+
+// ============================
+// HAPUS ITEM
+// ============================
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    renderCart();
+
+}
+
+
+// ============================
+// TAMPILKAN KERANJANG
+// ============================
+
+function renderCart() {
+
+    cartItemsElement.innerHTML = "";
+
     let total = 0;
+    let count = 0;
 
-    let message = [
-        "Halo kak, saya tertarik membeli item di Cube Gale.",
-        "",
-        "Berikut daftar pesanan saya:"
-    ];
 
-    cart.forEach(item => {
+    if (cart.length === 0) {
+
+        cartItemsElement.innerHTML = `
+            <p class="empty-cart">
+                Keranjang masih kosong.
+            </p>
+        `;
+
+    }
+
+
+    cart.forEach((item, index) => {
+
         const subtotal = item.price * item.quantity;
 
         total += subtotal;
 
-        message.push(
-            `• ${item.name} x${item.quantity} = ${formatRupiah(subtotal)}`
-        );
+        count += item.quantity;
+
+
+        const itemElement = document.createElement("div");
+
+        itemElement.className = "cart-item";
+
+        itemElement.innerHTML = `
+
+            <div>
+
+                <h4>${item.name}</h4>
+
+                <p>
+                    ${item.quantity} × ${rupiah(item.price)}
+                </p>
+
+            </div>
+
+            <div>
+
+                <p>${rupiah(subtotal)}</p>
+
+                <button onclick="removeItem(${index})">
+                    Hapus
+                </button>
+
+            </div>
+
+        `;
+
+        cartItemsElement.appendChild(itemElement);
+
     });
 
-    message.push(
-        "",
-        `Total: ${formatRupiah(total)}`,
-        "",
-        "Apakah item masih tersedia?",
-        "Terima kasih!"
-    );
 
-    const whatsappURL =
-        `https://wa.me/${WA_NUMBER}?text=${
-            encodeURIComponent(message.join("\n"))
-        }`;
+    cartCountElement.textContent = count;
 
-    window.open(whatsappURL, "_blank");
+    cartTotalElement.textContent = rupiah(total);
+
 }
 
-/* CLOSE WELCOME */
-function closeWelcome() {
-    const welcome = document.getElementById("welcomeScreen");
 
-    if (!welcome) return;
+// ============================
+// FILTER PRODUK
+// ============================
 
-    welcome.classList.add("hide");
+function filterProducts(category, button) {
 
-    setTimeout(() => {
-        welcome.style.display = "none";
-    }, 450);
-}
+    activeCategory = category;
 
-/* INITIALIZATION */
-document.addEventListener("DOMContentLoaded", () => {
-    updateCart();
+
+    categoryButtons.forEach(btn => {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+
     applyFilters();
 
-    document.addEventListener("keydown", event => {
-        if (event.key === "Escape") {
-            setCart(false);
+}
+
+
+// ============================
+// PENCARIAN + FILTER
+// ============================
+
+function applyFilters() {
+
+    const keyword = searchInput.value.toLowerCase().trim();
+
+    let visible = 0;
+
+
+    productCards.forEach(card => {
+
+        const category = card.dataset.category.toLowerCase();
+
+        const name = card.dataset.name.toLowerCase();
+
+
+        const matchCategory =
+            activeCategory === "all" ||
+            category === activeCategory;
+
+
+        const matchSearch =
+            name.includes(keyword);
+
+
+        if (matchCategory && matchSearch) {
+
+            card.style.display = "";
+
+            visible++;
+
+        } else {
+
+            card.style.display = "none";
+
         }
+
     });
+
+
+    document.getElementById("visibleCount").textContent = visible;
+
+
+    const noProducts = document.getElementById("noProducts");
+
+    noProducts.style.display = visible === 0 ? "block" : "none";
+
+}
+
+
+// ============================
+// EVENT SEARCH
+// ============================
+
+searchInput.addEventListener("input", applyFilters);
+
+
+// ============================
+// CHECKOUT WHATSAPP
+// ============================
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Keranjang kamu masih kosong!");
+
+        return;
+
+    }
+
+
+    let message = "Halo Cube Gale! Saya ingin memesan:\n\n";
+
+    let total = 0;
+
+
+    cart.forEach((item, index) => {
+
+        const subtotal = item.price * item.quantity;
+
+        total += subtotal;
+
+
+        message +=
+            `${index + 1}. ${item.name}\n` +
+            `Jumlah: ${item.quantity}\n` +
+            `Harga: ${rupiah(subtotal)}\n\n`;
+
+    });
+
+
+    message +=
+        "----------------------\n" +
+        `TOTAL: ${rupiah(total)}\n\n` +
+        "Mohon info ketersediaan barangnya. Terima kasih!";
+
+
+    const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(whatsappURL, "_blank");
+
+}
+
+
+// ============================
+// TUTUP KERANJANG DENGAN ESC
+// ============================
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        cartElement.classList.remove("show");
+
+        overlayElement.classList.remove("show");
+
+    }
+
 });
+
+
+// ============================
+// GAMBAR PENGGANTI
+// ============================
+
+document.querySelectorAll(".product-image").forEach((img, index) => {
+
+    img.addEventListener("error", function() {
+
+        const number = String(index + 1).padStart(2, "0");
+
+        this.src = "data:image/svg+xml;charset=UTF-8," +
+            encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="500" height="625">
+
+                    <rect width="100%" height="100%"
+                          fill="#e9e5db"/>
+
+                    <text x="50%" y="46%"
+                          text-anchor="middle"
+                          fill="#9b7956"
+                          font-size="65"
+                          font-family="Arial"
+                          font-weight="bold">
+                        CG.
+                    </text>
+
+                    <text x="50%" y="56%"
+                          text-anchor="middle"
+                          fill="#85877d"
+                          font-size="17"
+                          font-family="Arial">
+                        FOTO ${number}
+                    </text>
+
+                    <text x="50%" y="62%"
+                          text-anchor="middle"
+                          fill="#85877d"
+                          font-size="12"
+                          font-family="Arial">
+                        GANTI FOTO PRODUK
+                    </text>
+
+                </svg>
+            `);
+
+    }, { once: true });
+
+});
+
+
+// ============================
+// INIT
+// ============================
+
+renderCart();
+
+applyFilters();
