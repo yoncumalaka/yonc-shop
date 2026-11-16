@@ -2,457 +2,530 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Cube Gale — Thrift Store</title>
 
-    <title>Cube Gale — Thrifting</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-    
-
-<!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
 
 <header class="navbar">
 
-    <a
-        href="#home"
-        class="logo"
-    >
-        Cube<span>Gale</span>
+    <a href="#home" class="logo">
+        CUBE<span>GALE.</span>
     </a>
 
-
     <nav>
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#products">
-            Items
-        </a>
-
-        <a href="#about">
-            Tentang
-        </a>
-
+        <a href="#home">Home</a>
+        <a href="#products">Collection</a>
+        <a href="#about">About</a>
     </nav>
 
-
-    <button
-        class="cart-btn"
-        onclick="toggleCart()"
-    >
+    <button class="cart-btn" onclick="toggleCart()">
         🛒 <span id="cartCount">0</span>
     </button>
 
 </header>
 
 
-
 <main>
 
+<!-- HERO -->
 
-<!-- ================= HERO ================= -->
-
-<section
-    class="hero"
-    id="home"
->
+<section class="hero" id="home">
 
     <div class="hero-content">
 
-        <p class="badge">
-            Thrifting • Minin Minus
-        </p>
-
+        <span class="hero-label">CUBE GALE THRIFT STORE</span>
 
         <h1>
-            Thrifting<br>
-            <span>Good Quality.</span>
+            Good finds.<br>
+            <span>Better style.</span>
         </h1>
 
-
-        <p class="hero-desc">
-
-            Cari barang second?
-            Disini aja! kualitas minim minus
-            DM langsung via WhatsApp.
-
+        <p>
+            Temukan berbagai barang pilihan dengan harga
+            bersahabat. Setiap item punya ceritanya sendiri.
         </p>
 
-
-        <a
-            href="#products"
-            class="hero-btn"
-        >
-            Lihat Item→
+        <a href="#products" class="hero-button">
+            EXPLORE COLLECTION →
         </a>
+
+        <div class="hero-note">
+            SECOND HAND, FIRST CHOICE.
+        </div>
 
     </div>
 
-
-
-    <div class="hero-image">
-
-        <video autoplay loop playsinline>
-            <source src="" type="">
-        </video>
-    
-
+    <div class="hero-art">
+        <div class="art-circle"></div>
+        <div class="art-text">CG.</div>
+        <span class="art-caption">UNIQUE FINDS<br>ONLY HERE</span>
     </div>
 
 </section>
 
 
+<!-- RUNNING TEXT -->
 
-<!-- ================= PRODUCTS ================= -->
+<div class="ticker">
+    <div class="ticker-content">
+        CUBE GALE ✳ THRIFT FINDS ✳ UNIQUE ITEMS ✳
+        GOOD QUALITY ✳ SECOND HAND ✳ CUBE GALE ✳
+    </div>
+</div>
 
-<section
-    class="products-section"
-    id="products"
->
 
+<!-- PRODUCTS -->
 
-    <!-- JUDUL + SEARCH -->
+<section class="products-section" id="products">
 
     <div class="section-heading">
 
         <div>
-
-            <p class="small-title">
-                Cube Gale
+            <p class="section-label">THE COLLECTION</p>
+            <h2>Find Your <span>Style.</span></h2>
+            <p class="section-description">
+                Pilihan barang menarik buat kamu.
             </p>
-
-            <h2>
-                Pilih Item
-            </h2>
-
         </div>
 
+        <div class="item-counter">
+            <span id="visibleCount">8</span> ITEMS
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="catalog-tools">
 
         <input
+            type="search"
             id="searchInput"
-            type="text"
-            placeholder="Cari menu..."
-            onkeyup="searchProducts()"
+            placeholder="Cari barang..."
         >
 
     </div>
 
 
-
-    <!-- ================= KATEGORI ================= -->
+    <!-- CATEGORY -->
 
     <div class="category">
 
-        <button
-            class="active"
-            onclick="filterProducts('all', this)"
-        >
+        <button class="active" data-filter="all">
             Semua
         </button>
 
-
-        <button
-            onclick="filterProducts('Outer', this)"
-        >
+        <button data-filter="outer">
             Outer
         </button>
 
-
-        <button
-            onclick="filterProducts('Iwak', this)"
-        >
-            Iwak
+        <button data-filter="atasan">
+            Atasan
         </button>
 
+        <button data-filter="bawahan">
+            Bawahan
+        </button>
 
-    <!-- ================= PRODUCT GRID ================= -->
+        <button data-filter="aksesoris">
+            Aksesoris
+        </button>
 
-    <div
-        class="product-grid"
-        id="productGrid"
-    >
+        <button data-filter="random">
+            Random Finds
+        </button>
+
+    </div>
 
 
-        
+    <!-- PRODUCT GRID -->
+
+    <div class="product-grid" id="productGrid">
 
 
+        <!-- PRODUK 01 -->
 
-        <!-- ========== Outer ========== -->
-
-        <article
-            class="product-card"
+        <article class="product-card"
             data-category="outer"
-        >
+            data-name="Vintage Jacket">
 
-            <img
-                class="product-image"
-                src="IMG-20261112-WA0000.jpg"
-                alt="Outer"
-            >
+            <div class="product-image-wrap">
 
+                <img src="foto-01.jpg"
+                     alt="Vintage Jacket"
+                     class="product-image">
+
+                <span class="product-badge new">NEW</span>
+
+            </div>
 
             <div class="product-info">
 
-                <p class="category-name">
-                    Outer
-                </p>
+                <p class="category-name">OUTER</p>
 
+                <h3>Vintage Jacket</h3>
 
-                <h3>
-                    Outer
-                </h3>
+                <div class="product-bottom">
 
+                    <p class="price">Rp120.000</p>
 
-                <p class="price">
-                    Rp120.000
-                </p>
+                    <button onclick="addToCart('Vintage Jacket',120000)">
+                        + Keranjang
+                    </button>
 
-
-                <button
-                    onclick="addToCart('Outer', 120000)"
-                >
-                    + Keranjang
-                </button>
+                </div>
 
             </div>
 
         </article>
 
 
-        <!-- ========== 5 IWAK ========== -->
+        <!-- PRODUK 02 -->
 
-        <article
-            class="product-card"
-            data-category="Iwak"
-        >
+        <article class="product-card"
+            data-category="outer"
+            data-name="Classic Hoodie">
 
-            <img
-                class="product-image"
-                src="a66cf61162b23cd7a90c063046f95555.jpg"
-                alt="Orang Sigma"
-            >
+            <div class="product-image-wrap">
 
+                <img src="foto-02.jpg"
+                     alt="Classic Hoodie"
+                     class="product-image">
+
+                <span class="product-badge sale">SALE</span>
+
+            </div>
 
             <div class="product-info">
 
-                <p class="category-name">
-                    Iwak
-                </p>
+                <p class="category-name">OUTER</p>
 
+                <h3>Classic Hoodie</h3>
 
-                <h3>
-                    Orang Sigma
-                </h3>
+                <div class="product-bottom">
 
+                    <p class="price">Rp85.000</p>
 
-                <p class="price">
-                    Rp999.999.999
-                </p>
+                    <button onclick="addToCart('Classic Hoodie',85000)">
+                        + Keranjang
+                    </button>
 
-
-                <button
-                    onclick="addToCart('Orang Sigma', 999999999)"
-                >
-                    + Keranjang
-                </button>
+                </div>
 
             </div>
 
         </article>
 
 
+        <!-- PRODUK 03 -->
 
-        <!-- ========== 6 IWAK ========== -->
+        <article class="product-card"
+            data-category="atasan"
+            data-name="Basic Oversized Tee">
 
-        <article
-            class="product-card"
-            data-category="Iwak"
-        >
+            <div class="product-image-wrap">
 
-            <img
-                class="product-image"
-                src="IMG_20260915_151544_140.jpg"
-                alt="Budak Toboali"
-            >
+                <img src="foto-03.jpg"
+                     alt="Basic Oversized Tee"
+                     class="product-image">
 
+                <span class="product-badge rare">RARE</span>
+
+            </div>
 
             <div class="product-info">
 
-                <p class="category-name">
-                    Iwak
-                </p>
+                <p class="category-name">ATASAN</p>
 
+                <h3>Basic Oversized Tee</h3>
 
-                <h3>
-                    Budak
-                </h3>
+                <div class="product-bottom">
 
+                    <p class="price">Rp45.000</p>
 
-                <p class="price">
-                    Rp18.000.000
-                </p>
+                    <button onclick="addToCart('Basic Oversized Tee',45000)">
+                        + Keranjang
+                    </button>
 
-
-                <button
-                    onclick="addToCart('Budak Toboali', 18000000)"
-                >
-                    + Keranjang
-                </button>
+                </div>
 
             </div>
 
         </article>
 
 
+        <!-- PRODUK 04 -->
 
-        <!-- ========== 7 IWAK ========== -->
+        <article class="product-card"
+            data-category="atasan"
+            data-name="Vintage Shirt">
 
-        <article
-            class="product-card"
-            data-category="Iwak"
-        >
+            <div class="product-image-wrap">
 
-            <img
-                class="product-image"
-                src=""
-                alt="Iwak Black Pepper Bowl"
-            >
+                <img src="foto-04.jpg"
+                     alt="Vintage Shirt"
+                     class="product-image">
 
+            </div>
 
             <div class="product-info">
 
-                <p class="category-name">
-                    Iwak
-                </p>
+                <p class="category-name">ATASAN</p>
 
+                <h3>Vintage Shirt</h3>
 
-                <h3>
-                    Iwak Black Pepper Bowl
-                </h3>
+                <div class="product-bottom">
 
+                    <p class="price">Rp65.000</p>
 
-                <p class="price">
-                    Rp19.000
-                </p>
+                    <button onclick="addToCart('Vintage Shirt',65000)">
+                        + Keranjang
+                    </button>
 
-
-                <button
-                    onclick="addToCart('Beef Black Pepper Bowl', 19000)"
-                >
-                    + Keranjang
-                </button>
+                </div>
 
             </div>
 
         </article>
 
-<!-- ================= ABOUT ================= -->
 
-<section
-    class="about"
-    id="about"
->
+        <!-- PRODUK 05 -->
 
-    <p class="small-title">
-        ABOUT Cube Gale
-    </p>
+        <article class="product-card"
+            data-category="bawahan"
+            data-name="Loose Jeans">
+
+            <div class="product-image-wrap">
+
+                <img src="foto-05.jpg"
+                     alt="Loose Jeans"
+                     class="product-image">
+
+                <span class="product-badge new">NEW</span>
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category-name">BAWAHAN</p>
+
+                <h3>Loose Jeans</h3>
+
+                <div class="product-bottom">
+
+                    <p class="price">Rp100.000</p>
+
+                    <button onclick="addToCart('Loose Jeans',100000)">
+                        + Keranjang
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
 
 
-    <h2>
-        Simple outfit, happy mood.
-    </h2>
+        <!-- PRODUK 06 -->
+
+        <article class="product-card"
+            data-category="bawahan"
+            data-name="Cargo Pants">
+
+            <div class="product-image-wrap">
+
+                <img src="foto-06.jpg"
+                     alt="Cargo Pants"
+                     class="product-image">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category-name">BAWAHAN</p>
+
+                <h3>Cargo Pants</h3>
+
+                <div class="product-bottom">
+
+                    <p class="price">Rp90.000</p>
+
+                    <button onclick="addToCart('Cargo Pants',90000)">
+                        + Keranjang
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
 
 
-    <p>
+        <!-- PRODUK 07 -->
 
-        Barang second like new untuk kamu yang pengen
-        barang bagus tapi murah.
-        Semua pesanan diproses melalui WhatsApp.
+        <article class="product-card"
+            data-category="aksesoris"
+            data-name="Vintage Cap">
 
+            <div class="product-image-wrap">
+
+                <img src="foto-07.jpg"
+                     alt="Vintage Cap"
+                     class="product-image">
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category-name">AKSESORIS</p>
+
+                <h3>Vintage Cap</h3>
+
+                <div class="product-bottom">
+
+                    <p class="price">Rp35.000</p>
+
+                    <button onclick="addToCart('Vintage Cap',35000)">
+                        + Keranjang
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PRODUK 08 -->
+
+        <article class="product-card"
+            data-category="random"
+            data-name="Random Finds">
+
+            <div class="product-image-wrap">
+
+                <img src="foto-08.jpg"
+                     alt="Random Finds"
+                     class="product-image">
+
+                <span class="product-badge rare">RARE</span>
+
+            </div>
+
+            <div class="product-info">
+
+                <p class="category-name">RANDOM FINDS</p>
+
+                <h3>Random Finds</h3>
+
+                <div class="product-bottom">
+
+                    <p class="price">Rp25.000</p>
+
+                    <button onclick="addToCart('Random Finds',25000)">
+                        + Keranjang
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+    <p id="noProducts">
+        Barang tidak ditemukan.
     </p>
 
 </section>
 
 
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="about-content">
+
+        <p class="section-label">ABOUT CUBE GALE</p>
+
+        <h2>
+            Simple finds.<br>
+            <span>Unique stories.</span>
+        </h2>
+
+        <p>
+            Cube Gale adalah tempat menemukan barang pilihan
+            dengan harga yang bersahabat. Temukan item unik
+            dan jadikan gayamu lebih personal.
+        </p>
+
+        <a href="#products" class="about-button">
+            EXPLORE ITEMS →
+        </a>
+
+    </div>
+
+    <div class="about-decoration">
+        CG.
+    </div>
+
+</section>
+
 </main>
 
 
-
-<!-- ================= OVERLAY ================= -->
+<!-- OVERLAY -->
 
 <div
     class="overlay"
     id="overlay"
-    onclick="toggleCart()"
-></div>
+    onclick="toggleCart()">
+</div>
 
 
+<!-- CART -->
 
-<!-- ================= CART ================= -->
-
-<aside
-    class="cart"
-    id="cart"
->
-
+<aside class="cart" id="cart">
 
     <div class="cart-header">
 
-        <h2>
-            Pesanan
-        </h2>
+        <div>
+            <p class="section-label">YOUR SELECTION</p>
+            <h2>Shopping Cart</h2>
+        </div>
 
-
-        <button
-            onclick="toggleCart()"
-        >
-            ✕
+        <button class="cart-close" onclick="toggleCart()">
+            ×
         </button>
 
     </div>
 
 
-
-    <div
-        id="cartItems"
-        class="cart-items"
-    >
+    <div class="cart-items" id="cartItems">
 
         <p class="empty-cart">
-            Belum ada pesanan 
-    
+            Keranjang masih kosong.
         </p>
 
     </div>
 
 
-
     <div class="cart-bottom">
-
 
         <div class="total">
 
-            <span>
-                Total
-            </span>
-
+            <span>Total</span>
 
             <strong id="cartTotal">
                 Rp0
@@ -460,48 +533,31 @@
 
         </div>
 
-
-
-        <button
-            class="checkout"
-            onclick="checkout()"
-        >
-            via WhatsApp →
+        <button class="checkout" onclick="checkout()">
+            CHECKOUT VIA WHATSAPP →
         </button>
-
 
     </div>
 
 </aside>
 
 
-
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
 <footer>
 
+    <a href="#home" class="logo">
+        CUBE<span>GALE.</span>
+    </a>
 
-    <div class="logo">
+    <p>© 2026 Cube Gale. All rights reserved.</p>
 
-        Cube<span>Gale</span>
-
-    </div>
-
-
-    <p>
-        © 2026 yoncumalaka
-    </p>
-
+    <a href="#home" class="back-top">BACK TO TOP ↑</a>
 
 </footer>
 
 
-
-<!-- ================= JAVASCRIPT ================= -->
-
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
