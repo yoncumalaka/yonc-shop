@@ -1,359 +1,225 @@
 let cart = [];
 
 const WA_NUMBER = "6282178601945";
+let activeCategory = "all";
 
-
-/* =========================
-   FORMAT RUPIAH
-========================= */
-
+/* FORMAT RUPIAH */
 function formatRupiah(number) {
-
     return new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
         maximumFractionDigits: 0
     }).format(number);
-
 }
 
-
-/* =========================
-   ADD TO CART
-========================= */
-
+/* ADD TO CART */
 function addToCart(name, price) {
-
     const existing = cart.find(
         item => item.name === name
     );
 
-
     if (existing) {
-
         existing.quantity++;
-
     } else {
-
         cart.push({
-            name: name,
-            price: price,
+            name,
+            price,
             quantity: 1
         });
-
     }
 
-
     updateCart();
-
-
-    document
-        .getElementById("cart")
-        .classList.add("show");
-
-
-    document
-        .getElementById("overlay")
-        .classList.add("show");
-
+    setCart(true);
 }
 
-
-/* =========================
-   UPDATE CART
-========================= */
-
+/* UPDATE CART */
 function updateCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
 
-    const cartItems =
-        document.getElementById("cartItems");
-
-    const cartCount =
-        document.getElementById("cartCount");
-
-    const cartTotal =
-        document.getElementById("cartTotal");
-
+    if (!cartItems || !cartCount || !cartTotal) return;
 
     cartItems.innerHTML = "";
 
-
     if (cart.length === 0) {
-
         cartItems.innerHTML =
-            '<p class="empty-cart">Belum ada pesanan 🍚</p>';
-
-    } else {
-
-        cart.forEach((item, index) => {
-
-            cartItems.innerHTML += `
-
-                <div class="cart-item">
-
-                    <div>
-
-                        <h4>
-                            ${item.name}
-                        </h4>
-
-                        <p>
-                            ${formatRupiah(item.price)}
-                            × ${item.quantity}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="remove"
-                        onclick="removeItem(${index})"
-                    >
-                        Hapus
-                    </button>
-
-                </div>
-
-            `;
-
-        });
-
+            '<p class="empty-cart">Keranjang masih kosong.</p>';
     }
 
+    cart.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
 
-    const totalQuantity = cart.reduce(
-        (sum, item) =>
-            sum + item.quantity,
-        0
+        const details = document.createElement("div");
+
+        const title = document.createElement("h4");
+        title.textContent = item.name;
+
+        const price = document.createElement("p");
+        price.textContent =
+            `${formatRupiah(item.price)} × ${item.quantity}`;
+
+        details.append(title, price);
+
+        const remove = document.createElement("button");
+        remove.className = "remove";
+        remove.textContent = "Hapus";
+
+        remove.onclick = () => removeItem(index);
+
+        row.append(details, remove);
+        cartItems.appendChild(row);
+    });
+
+    const quantity = cart.reduce(
+        (sum, item) => sum + item.quantity, 0
     );
 
-
-    const totalPrice = cart.reduce(
-        (sum, item) =>
-            sum + item.price * item.quantity,
-        0
+    const total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity, 0
     );
 
-
-    cartCount.textContent =
-        totalQuantity;
-
-
-    cartTotal.textContent =
-        formatRupiah(totalPrice);
-
+    cartCount.textContent = quantity;
+    cartTotal.textContent = formatRupiah(total);
 }
 
-
-/* =========================
-   REMOVE ITEM
-========================= */
-
+/* REMOVE ITEM */
 function removeItem(index) {
-
     cart.splice(index, 1);
-
     updateCart();
-
 }
 
-
-/* =========================
-   TOGGLE CART
-========================= */
+/* TOGGLE CART */
+function setCart(open) {
+    document.getElementById("cart").classList.toggle("show", open);
+    document.getElementById("overlay").classList.toggle("show", open);
+    document.body.classList.toggle("cart-open", open);
+}
 
 function toggleCart() {
+    const cart = document.getElementById("cart");
 
-    document
-        .getElementById("cart")
-        .classList.toggle("show");
-
-
-    document
-        .getElementById("overlay")
-        .classList.toggle("show");
-
+    setCart(!cart.classList.contains("show"));
 }
 
+/* FILTER + SEARCH */
+function applyFilters() {
+    const keyword = document
+        .getElementById("searchInput")
+        .value.trim().toLowerCase();
 
-/* =========================
-   FILTER PRODUCTS
-========================= */
+    let visible = 0;
 
+    document.querySelectorAll(".product-card").forEach(product => {
+        const category = (
+            product.dataset.category || ""
+        ).toLowerCase();
+
+        const name = product.querySelector("h3")
+            .textContent.toLowerCase();
+
+        const categoryMatch =
+            activeCategory === "all" ||
+            category === activeCategory.toLowerCase();
+
+        const searchMatch = name.includes(keyword);
+
+        const show = categoryMatch && searchMatch;
+
+        product.hidden = !show;
+
+        if (show) visible++;
+    });
+
+    const empty = document.getElementById("noProducts");
+
+    if (empty) {
+        empty.hidden = visible !== 0;
+    }
+}
+
+/* FILTER CATEGORY */
 function filterProducts(category, button) {
+    activeCategory = category;
 
-    const selectedCategory =
-        String(category)
-            .trim()
-            .toLowerCase();
-
-
-    document
-        .querySelectorAll(".category button")
+    document.querySelectorAll(".category button")
         .forEach(btn => {
-
             btn.classList.remove("active");
-
         });
-
 
     button.classList.add("active");
 
-
-    document
-        .querySelectorAll(".product-card")
-        .forEach(product => {
-
-            const productCategory =
-                String(
-                    product.dataset.category || ""
-                )
-                .trim()
-                .toLowerCase();
-
-
-            if (
-                selectedCategory === "all" ||
-                productCategory === selectedCategory
-            ) {
-
-                product.style.display = "";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
-
-        });
-
-
-    /*
-        Bersihkan pencarian ketika
-        pindah kategori.
-    */
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-    if (searchInput) {
-        searchInput.value = "";
-    }
-
+    applyFilters();
 }
 
-
-/* =========================
-   SEARCH PRODUCTS
-========================= */
-
+/* SEARCH */
 function searchProducts() {
-
-    const keyword =
-        document
-            .getElementById("searchInput")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    document
-        .querySelectorAll(".product-card")
-        .forEach(product => {
-
-            const name =
-                product
-                    .querySelector("h3")
-                    .textContent
-                    .toLowerCase();
-
-
-            if (name.includes(keyword)) {
-
-                product.style.display = "";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
-
-        });
-
+    applyFilters();
 }
 
-
-/* =========================
-   CHECKOUT
-========================= */
-
+/* CHECKOUT WHATSAPP */
 function checkout() {
-
     if (cart.length === 0) {
-
-        alert(
-            "Keranjang masih kosong 😭"
-        );
-
+        alert("Keranjang masih kosong!");
         return;
-
     }
-
-
-    let message =
-        "laper nih kak, saya mau PO rice bowl dong:%0A%0A";
-
 
     let total = 0;
 
+    let message = [
+        "Halo kak, saya tertarik membeli item di Cube Gale.",
+        "",
+        "Berikut daftar pesanan saya:"
+    ];
 
     cart.forEach(item => {
-
-        const subtotal =
-            item.price * item.quantity;
-
+        const subtotal = item.price * item.quantity;
 
         total += subtotal;
 
-
-        message +=
-            `• ${item.name} x${item.quantity} = ${formatRupiah(subtotal)}%0A`;
-
+        message.push(
+            `• ${item.name} x${item.quantity} = ${formatRupiah(subtotal)}`
+        );
     });
 
-
-    message +=
-        `%0ATotal: ${formatRupiah(total)}%0A%0AMohon info untuk proses PO ya.`;
-
-
-    const whatsappURL =
-        `https://wa.me/${WA_NUMBER}?text=${message}`;
-
-
-    window.open(
-        whatsappURL,
-        "_blank"
+    message.push(
+        "",
+        `Total: ${formatRupiah(total)}`,
+        "",
+        "Apakah item masih tersedia?",
+        "Terima kasih!"
     );
 
+    const whatsappURL =
+        `https://wa.me/${WA_NUMBER}?text=${
+            encodeURIComponent(message.join("\n"))
+        }`;
+
+    window.open(whatsappURL, "_blank");
 }
 
-
-/* =========================
-   START
-========================= */
-
-updateCart();
-
+/* CLOSE WELCOME */
 function closeWelcome() {
+    const welcome = document.getElementById("welcomeScreen");
 
-    const welcome =
-        document.getElementById("welcomeScreen");
+    if (!welcome) return;
 
     welcome.classList.add("hide");
 
     setTimeout(() => {
-
         welcome.style.display = "none";
-
     }, 450);
-
 }
+
+/* INITIALIZATION */
+document.addEventListener("DOMContentLoaded", () => {
+    updateCart();
+    applyFilters();
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            setCart(false);
+        }
+    });
+});
